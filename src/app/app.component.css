@@ -1,0 +1,9 @@
+#main {
+  display: block;
+  margin: 0 auto 0 auto;
+  padding-top: 10px;
+
+  width: 70%;
+  max-width: 1400px;
+  min-width: 900px;
+}

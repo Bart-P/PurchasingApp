@@ -1,0 +1,26 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <div class="mat-tab-label-text">All Suppliers</div>
+    </ng-template>
+    <app-suppliers-table></app-suppliers-table>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <div class="mat-tab-label-text">Add Supplier</div>
+    </ng-template>
+    <app-add-supplier-form></app-add-supplier-form>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <div class="mat-tab-label-text">Add Tags</div>
+    </ng-template>
+    <app-add-suppliers-tags></app-add-suppliers-tags>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <div class="mat-tab-label-text">Add Category</div>
+    </ng-template>
+    <app-add-suppliers-categories></app-add-suppliers-categories>
+  </mat-tab>
+</mat-tab-group>
