@@ -34,6 +34,7 @@ export class AddSupplierFormComponent implements OnInit {
       companyLanguage: formValues.companyLang,
       companyWeb: formValues.companyWeb,
       companyPhone: formValues.companyPhone,
+      created: new Date(),
     }
 
     this.suppliersService.addSupplierToDb(supplier);

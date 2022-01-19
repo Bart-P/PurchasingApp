@@ -13,4 +13,6 @@ export interface Supplier {
   companyPersons?: Person[];
   companyAddresses?: Address[];
   companyContactInfos?: ContactInfo[];
+  created?: Date;
+  lastModified?: Date;
 }

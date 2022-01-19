@@ -28,6 +28,7 @@ export class SuppliersService {
         companyWeb: supplier.companyWeb,
         companyPhone: supplier.companyPhone,
         companyLanguage: supplier.companyLanguage,
+        lastModified: new Date(),
       })
       .then(() => this.uiService.successNotification('supplier ' + supplier.id + ' updated!'))
       .catch(err => this.uiService.errorNotification('sorry could not update supplier... Error: ' + err))

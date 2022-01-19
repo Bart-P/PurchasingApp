@@ -18,7 +18,7 @@ export class SuppliersTableComponent implements OnInit, OnDestroy {
   isLoadingSub: Subscription = new Subscription();
   isLoading$?: boolean;
   suppliers$: Supplier[] = [];
-  displayedColumns: string[] = ['name', 'email', 'web', 'phone', 'tableControls'];
+  displayedColumns: string[] = ['name', 'email', 'web', 'phone', 'created', 'lastModified', 'tableControls'];
 
   constructor(
     private suppliersService: SuppliersService,
@@ -42,11 +42,6 @@ export class SuppliersTableComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnDestroy(): void {
-    this.subs.forEach(sub => sub.unsubscribe());
-    this.subs = [];
-  }
-
   openEditDialog(supplier: Supplier) {
     this.dialog.open(EditSupplierDialogComponent, {
       data: {
@@ -59,4 +54,10 @@ export class SuppliersTableComponent implements OnInit, OnDestroy {
     });
 
   }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => sub.unsubscribe());
+    this.subs = [];
+  }
+
 }

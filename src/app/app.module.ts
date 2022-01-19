@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
+import {registerLocaleData} from "@angular/common";
+import localeDe from "@angular/common/locales/de"
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from "@angular/flex-layout";
@@ -38,8 +39,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {
   EditSupplierDialogComponent
 } from './suppliers/edit-supplier-dialog/edit-supplier-dialog.component';
-import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import {MatDialogModule} from "@angular/material/dialog";
 
+registerLocaleData(localeDe, "de")
 
 @NgModule({
   declarations: [
@@ -75,7 +77,7 @@ import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
     MatTooltipModule,
     MatDialogModule,
   ],
-  providers: [SuppliersService, UiService, MatDialogRef],
+  providers: [SuppliersService, UiService,],
   bootstrap: [AppComponent]
 })
 export class AppModule {
