@@ -1,8 +1,9 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Supplier} from "../../model/supplier.model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Lang} from "../../model/lang.model";
+import {SuppliersService} from "../suppliers.service";
 
 @Component({
   selector: 'app-edit-supplier-dialog',
@@ -10,6 +11,7 @@ import {Lang} from "../../model/lang.model";
   styleUrls: ['./edit-supplier-dialog.component.css']
 })
 export class EditSupplierDialogComponent {
+
   editSupplierForm = new FormGroup({
     id: new FormControl(this.data.id),
     companyName: new FormControl(this.data.companyName),
@@ -20,10 +22,23 @@ export class EditSupplierDialogComponent {
   });
   languages = Object.keys(Lang);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Supplier) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Supplier,
+              private dialogRef: MatDialogRef<EditSupplierDialogComponent>,
+              private suppliersService: SuppliersService) {
   }
 
   onSubmit() {
+    const fieldValues = this.editSupplierForm.getRawValue();
+    const updatedSupplier: Supplier = {
+      id: fieldValues.id,
+      companyName: fieldValues.companyName,
+      companyEmail: fieldValues.companyEmail,
+      companyWeb: fieldValues.companyWeb,
+      companyPhone: fieldValues.companyPhone,
+      companyLanguage: fieldValues.companyLang,
+    }
 
+    this.suppliersService.updateSupplier(updatedSupplier);
+    this.dialogRef.close();
   }
 }

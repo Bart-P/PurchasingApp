@@ -38,7 +38,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {
   EditSupplierDialogComponent
 } from './suppliers/edit-supplier-dialog/edit-supplier-dialog.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -75,7 +75,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatTooltipModule,
     MatDialogModule,
   ],
-  providers: [SuppliersService, UiService],
+  providers: [SuppliersService, UiService, MatDialogRef],
   bootstrap: [AppComponent]
 })
 export class AppModule {

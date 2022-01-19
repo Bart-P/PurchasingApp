@@ -18,6 +18,21 @@ export class SuppliersService {
         ' again later.. Error: ' + err));
   }
 
+  updateSupplier(supplier: Supplier) {
+
+    this.db.collection<Supplier>('suppliers')
+      .doc(supplier.id)
+      .update({
+        companyName: supplier.companyName,
+        companyEmail: supplier.companyEmail,
+        companyWeb: supplier.companyWeb,
+        companyPhone: supplier.companyPhone,
+        companyLanguage: supplier.companyLanguage,
+      })
+      .then(() => this.uiService.successNotification('supplier ' + supplier.id + ' updated!'))
+      .catch(err => this.uiService.errorNotification('sorry could not update supplier... Error: ' + err))
+  }
+
   fetchAllSuppliers(): Observable<Supplier[]> {
     let suppliersCollection = this.db.collection<Supplier>('suppliers');
     return suppliersCollection
