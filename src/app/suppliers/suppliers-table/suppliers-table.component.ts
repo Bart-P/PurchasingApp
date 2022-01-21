@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {SuppliersService} from "../suppliers.service";
 import {Subscription} from "rxjs";
 import {Supplier} from "../../model/supplier.model";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {EditSupplierDialogComponent} from "../edit-supplier-dialog/edit-supplier-dialog.component";
 import {UiService} from "../../shared/ui.service";
 import {MatTableDataSource} from "@angular/material/table";
@@ -24,8 +24,10 @@ export class SuppliersTableComponent implements OnInit, OnDestroy, AfterViewInit
   displayedColumns: string[] = ['companyName', 'companyEmail', 'companyWeb', 'companyPhone', 'created', 'lastModified', 'tableControls'];
   dataSource = new MatTableDataSource<Supplier>();
 
-  @ViewChild(MatSort) matSort: MatSort;
-  @ViewChild(MatPaginator) matPaginator: MatPaginator;
+  @ViewChild(MatSort) matSort!: MatSort;
+  @ViewChild(MatPaginator) matPaginator!: MatPaginator;
+
+  editSupplierDialogRef?: MatDialogRef<EditSupplierDialogComponent>;
 
   constructor(
     private suppliersService: SuppliersService,
@@ -49,16 +51,17 @@ export class SuppliersTableComponent implements OnInit, OnDestroy, AfterViewInit
         this.uiService.isLoading.next(false);
       });
 
+
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.matSort;
     this.dataSource.paginator = this.matPaginator;
-    console.log(this.matSort, this.matPaginator);
+    this.dataSource.sortData(this.dataSource.data, this.matSort);
   }
 
   openEditDialog(supplier: Supplier) {
-    this.dialog.open(EditSupplierDialogComponent, {
+    this.editSupplierDialogRef = this.dialog.open(EditSupplierDialogComponent, {
       data: {
         ...supplier,
       },
@@ -74,5 +77,4 @@ export class SuppliersTableComponent implements OnInit, OnDestroy, AfterViewInit
     this.subs.forEach(sub => sub.unsubscribe());
     this.subs = [];
   }
-
 }

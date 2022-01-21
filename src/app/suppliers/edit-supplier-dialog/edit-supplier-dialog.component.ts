@@ -39,6 +39,7 @@ export class EditSupplierDialogComponent {
     }
 
     this.suppliersService.updateSupplier(updatedSupplier);
+
     this.dialogRef.close();
   }
 }

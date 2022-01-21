@@ -1,79 +1,76 @@
+<table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8"
+       matSortActive="created" matSortDirection="desc">
+
+  <ng-container matColumnDef="companyName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header=""> Company Name
+    </th>
+    <td mat-cell *matCellDef="let supplier"> {{supplier["companyName"]}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="companyEmail">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header=""> Company Email</th>
+    <td mat-cell *matCellDef="let supplier"> {{supplier["companyEmail"]}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="companyWeb">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header=""> Web</th>
+    <td mat-cell *matCellDef="let supplier"> {{supplier["companyWeb"]}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="companyPhone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header=""> Phone</th>
+    <td mat-cell *matCellDef="let supplier"> {{supplier["companyPhone"]}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="created">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header=""> Created</th>
+    <td mat-cell *matCellDef="let supplier">
+      {{ supplier["created"]?.toDate() | date:'medium':'+0200':'de-DE'}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastModified">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header=""> Modified</th>
+    <td mat-cell *matCellDef="let supplier"> {{supplier.lastModified?.toDate() |
+      date:'medium':'+0200':'de-DE'}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tableControls">
+    <th mat-header-cell *matHeaderCellDef> Controls</th>
+    <td mat-cell *matCellDef="let supplier">
+      <div>
+        <button mat-icon-button
+                matTooltip="Edit supplier"
+                (click)="openEditDialog(supplier)"
+                aria-label="Edit supplier button">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button
+                color="primary"
+                matTooltip="Add tag to supplier"
+                aria-label="Add tag to supplier button">
+          <mat-icon>local_offer</mat-icon>
+        </button>
+        <button mat-icon-button
+                color="warn"
+                matTooltip="Delete supplier"
+                aria-label="Delete supplier button">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
 <div class="spinner-box" fxLayoutAlign="center center" *ngIf="isLoading$">
   <mat-spinner></mat-spinner>
 </div>
-<div>
-  <!-- TODO handle the if in other component, otherwise no sort or pagination works for whatever reason... *ngIf="!isLoading$" -->
-  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="companyName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header=""
-          sortActionDescription="Sort by name"> Company Name
-      </th>
-      <td mat-cell *matCellDef="let supplier"> {{supplier["companyName"]}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="companyEmail">
-      <th mat-header-cell *matHeaderCellDef> Company Email</th>
-      <td mat-cell *matCellDef="let supplier"> {{supplier["companyEmail"]}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="companyWeb">
-      <th mat-header-cell *matHeaderCellDef> Web</th>
-      <td mat-cell *matCellDef="let supplier"> {{supplier["companyWeb"]}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="companyPhone">
-      <th mat-header-cell *matHeaderCellDef> Phone</th>
-      <td mat-cell *matCellDef="let supplier"> {{supplier["companyPhone"]}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="created">
-      <th mat-header-cell *matHeaderCellDef> Created</th>
-      <td mat-cell *matCellDef="let supplier">
-        {{ supplier["created"]?.toDate() | date:'medium':'+0200':'de-DE'}}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="lastModified">
-      <th mat-header-cell *matHeaderCellDef> Modified</th>
-      <td mat-cell *matCellDef="let supplier"> {{supplier.lastModified?.toDate() |
-        date:'medium':'+0200':'de-DE'}}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="tableControls">
-      <th mat-header-cell *matHeaderCellDef> Controls</th>
-      <td mat-cell *matCellDef="let supplier">
-        <div>
-          <button mat-icon-button
-                  matTooltip="Edit supplier"
-                  (click)="openEditDialog(supplier)"
-                  aria-label="Edit supplier button">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button
-                  color="primary"
-                  matTooltip="Add tag to supplier"
-                  aria-label="Add tag to supplier button">
-            <mat-icon>local_offer</mat-icon>
-          </button>
-          <button mat-icon-button
-                  color="warn"
-                  matTooltip="Delete supplier"
-                  aria-label="Delete supplier button">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 20, 50, 100]"
-                 showFirstLastButtons
-                 aria-label="Select page of suppliers">
-  </mat-paginator>
-
-</div>
+<mat-paginator [pageSizeOptions]="[5, 20, 50, 100]"
+               showFirstLastButtons
+               aria-label="Select page of suppliers">
+</mat-paginator>
