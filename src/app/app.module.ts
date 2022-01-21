@@ -40,6 +40,8 @@ import {
   EditSupplierDialogComponent
 } from './suppliers/edit-supplier-dialog/edit-supplier-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 registerLocaleData(localeDe, "de")
 
@@ -76,6 +78,8 @@ registerLocaleData(localeDe, "de")
     MatIconModule,
     MatTooltipModule,
     MatDialogModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [SuppliersService, UiService,],
   bootstrap: [AppComponent]
